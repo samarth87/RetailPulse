@@ -255,6 +255,34 @@ streamlit run app.py
 Open your web browser at:
 http://localhost:8501
 
+### Deploying to Streamlit Community Cloud (Step-by-Step)
+
+RetailPulse is fully pre-configured for 1-click cloud deployment on [Streamlit Community Cloud](https://share.streamlit.io).
+
+#### Step 1: Push Your Code to GitHub
+Ensure your latest changes are pushed to your GitHub repository:
+```bash
+git add .
+git commit -m "Configure RetailPulse for Streamlit Cloud deployment"
+git push origin main
+```
+
+#### Step 2: Sign In to Streamlit Community Cloud
+1. Go to [share.streamlit.io](https://share.streamlit.io).
+2. Sign in with your GitHub account.
+
+#### Step 3: Deploy the App
+1. Click the **"New app"** (or **"Create app"**) button.
+2. Select **"I already have an app"**.
+3. Fill in the deployment fields:
+   • **Repository**: `samarth87/RetailPulse` (or your GitHub username/repo)
+   • **Branch**: `main`
+   • **Main file path**: `app.py`
+   • **App URL (optional)**: customize your public URL subdomain (e.g. `retailpulse-analytics`)
+4. Click **"Deploy!"**.
+
+Streamlit Cloud will automatically detect `requirements.txt`, install dependencies, apply the `.streamlit/config.toml` dark theme, and launch the dashboard with a public HTTPS link in 1–2 minutes!
+
 ### Running with Docker
 
 RetailPulse includes a production-ready Dockerfile based on python:3.11-slim with built-in health checks.
@@ -327,6 +355,7 @@ You can fine-tune business assumptions directly in app.py:
 
 ```
 retailpulse/
+├── .gitignore                       # Git exclusion rules (prevents committing venv, caches, logs)
 ├── .streamlit/
 │   └── config.toml                  # Custom theme (dark mode), server, and upload settings
 ├── data/
@@ -334,8 +363,8 @@ retailpulse/
 ├── app.py                           # Core application: 8 analytical modules, ML models & UI
 ├── Dockerfile                       # Container definition with healthcheck and multi-stage options
 ├── kaggle_online_retail_sample.csv  # Root sample dataset for instant download and inspection
-├── README.md                        # Platform documentation and startup guide
-├── requirements.txt                 # Core dependencies (Streamlit, Scikit-learn, Plotly, Pandas)
+├── README.md                        # Platform documentation, deployment and startup guide
+├── requirements.txt                 # Core dependencies for Streamlit Cloud & local execution
 └── requirements-optional.txt        # Optional ML packages (Prophet, XGBoost)
 ```
 
